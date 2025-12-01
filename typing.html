@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東方タイピングゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- メニュー画面 -->
+    <div id="menuScreen" class="menu-screen">
+        <h1 class="menu-title">東方タイピングゲーム</h1>
+        <div class="menu-buttons">
+            <button id="beginnerBtn" class="menu-btn">初心者</button>
+            <button id="advancedBtn" class="menu-btn">上級者（2分）</button>
+        </div>
+    </div>
+
+    <div id="gameContainer" class="game-container hidden">
+        <div class="game-background">
+            <img src="haikei.png" alt="背景" class="bg-image">
+        </div>
+
+        <!-- 左側：プレイヤー -->
+        <div class="character-section player-character">
+            <img id="playerImg" src="youmu-batoru.png" alt="プレイヤー" class="character-img">
+            <div class="character-hp">
+                <div class="hp-bar player-hp">
+                    <div class="hp-fill"></div>
+                </div>
+                <p class="hp-text"><span class="player-hp-value">100</span> / 100</p>
+            </div>
+        </div>
+
+        <!-- 中央：ゲーム情報 -->
+        <div class="game-info">
+            <div class="word-display">
+                <p class="current-word">typing</p>
+            </div>
+
+            <div class="input-area">
+                <input 
+                    type="text" 
+                    id="userInput" 
+                    class="input-field" 
+                    placeholder="ここに入力"
+                    autocomplete="off"
+                >
+            </div>
+
+            <!-- タイマー表示（上級者モードで使用） -->
+            <div id="timer" class="timer" aria-hidden="true">02:00</div>
+
+            <!-- 統計表示（リアルタイム） -->
+            <div class="stats">
+                <div class="stat-item">正解: <span class="stat-value correct-count">0</span></div>
+                <div class="stat-item">ミス: <span class="stat-value miss-count">0</span></div>
+            </div>
+        </div>
+
+        <!-- 右側：敵 -->
+        <div class="character-section enemy-character">
+            <img id="enemyImg" src="huran-batoru.png" alt="敵" class="character-img">
+            <div class="character-hp">
+                <div class="hp-bar enemy-hp">
+                    <div class="hp-fill"></div>
+                </div>
+                <p class="hp-text"><span class="enemy-hp-value">100</span> / 100</p>
+            </div>
+        </div>
+
+        <!-- ゲーム終了モーダル -->
+        <div id="gameOverModal" class="modal">
+            <div class="modal-content">
+                <h2 id="gameOverTitle">ゲーム終了</h2>
+                <p id="gameOverMessage">メッセージ</p>
+                <div class="final-stats">
+                    <p>正解: <span id="finalCorrect">0</span></p>
+                    <p>ミス: <span id="finalMiss">0</span></p>
+                </div>
+                <button id="restartBtn" class="btn-restart">もう一度プレイ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

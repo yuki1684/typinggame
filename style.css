@@ -1,0 +1,350 @@
+body {
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    background: none; /* 背景色を削除 */
+}
+
+/* メニュー画面を全画面に */
+.menu-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    text-align: center;
+    background-image: url('haikei.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.25);
+    gap: 0; /* ギャップを削除（タイトルとボタンが密接） */
+}
+
+.menu-title {
+    font-size: 3em;
+    color: #000;
+    margin: 0 0 30px 0; /* タイトル下にマージン */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.menu-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 0;
+}
+
+.menu-btn {
+    padding: 15px 35px;
+    font-size: 1.3em;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #000000;
+    box-shadow: 0 6px 18px rgba(102,126,234,0.25);
+    transition: transform 0.2s ease;
+}
+
+.menu-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ゲーム画面を全画面に */
+.game-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    display: flex;
+    justify-content: center; /* 中央に配置 */
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    margin: 0;
+    box-sizing: border-box;
+    background: none; /* 背景なし */
+}
+
+.game-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: rgb(0, 0, 0);
+    padding: 30px;
+    text-align: center;
+}
+
+.game-header h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.game-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    padding: 40px;
+    align-items: center;
+}
+
+/* 追加: 隠すためのユーティリティ */
+.hidden {
+    display: none !important;
+}
+
+/* 背景画像を背面に */
+.game-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+.bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+}
+
+/* キャラセクション */
+.character-section {
+    z-index: 2;
+    width: 250px; /* 幅を固定 */
+    flex-shrink: 0; /* 縮小しない */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-character { /* 左側 */
+    align-items: flex-start;
+}
+
+.enemy-character { /* 右側 */
+    align-items: flex-end;
+}
+
+/* キャラ画像 */
+.character-img {
+    width: 250px;
+    transition: transform 0.25s ease;
+    will-change: transform;
+}
+
+/* ダメージ時の移動（JSで .damaged を付与） */
+.player-character .character-img.damaged {
+    transform: translateX(-18px);
+}
+.enemy-character .character-img.damaged {
+    transform: translateX(18px);
+}
+
+/* 中央ゲーム情報 */
+.game-info {
+    z-index: 2;
+    width: 400px; /* 幅を固定 */
+    flex-shrink: 0; /* 縮小しない */
+    border: 2px solid #002efc;
+    border-radius: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.word-display {
+    margin-bottom: 20px;
+}
+
+.word-display .label {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.current-word {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #667eea;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 5px;
+}
+
+/* タイマー */
+.timer {
+    font-size: 1.2em;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* HPバー */
+.hp-bar {
+    width: 260px; /* 横に長く */
+    min-width: 160px;
+    height: 30px; /* 高さを大きく */
+    background: #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 10px 0;
+    border: 2px solid #999;
+}
+
+.enemy-hp .hp-fill {
+    background: linear-gradient(90deg, #ff4757, #ff6348);
+    height: 100%;
+    width: 100%;
+    transition: width 0.3s ease;
+}
+
+.player-hp .hp-fill {
+    background: linear-gradient(90deg, #2ed573, #26de81);
+    height: 100%;
+    width: 100%;
+    transition: width 0.3s ease;
+}
+
+.hp-text {
+    font-size: 0.9em;
+    color: #000; /* 黒に変更 */
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+/* 統計情報 */
+.stats {
+    display: none !important;
+    justify-content: space-around;
+    margin-top: 12px;
+}
+.stat-item { font-size: 1em; color: #444; }
+
+.stat-label {
+    color: #666;
+    font-weight: bold;
+}
+
+.stat-value {
+    color: #667eea;
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 1.3em;
+}
+
+/* ゲーム終了モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+}
+
+.modal-content h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#gameOverMessage {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.final-stats {
+    background: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.final-stats p {
+    font-size: 1.1em;
+    color: #333;
+    margin: 10px 0;
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.btn-restart:hover {
+    transform: scale(1.05);
+}
+
+/* 入力フィールド周りを中央にして大きく、赤い枠に変更 */
+.input-area {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center; /* 中央に配置 */
+}
+.input-field {
+    width: 70%; /* 少し大きめ */
+    padding: 18px; /* スペースを大きく */
+    font-size: 1.3em;
+    border: 2px solid #dc3545; /* 赤い枠 */
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.input-field:focus {
+    outline: none;
+    border-color: #b21f2d;
+    box-shadow: 0 0 12px rgba(220,53,69,0.18);
+}
+
+/* モバイル時の調整 */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+    .character-section { width: 100%; order: unset; align-items: center; }
+    .game-info { width: 100%; margin: 10px 0; }
+    .character-img { width: 160px; }
+    .input-field { width: 90%; padding: 14px; font-size: 1.1em; }
+    .hp-bar { width: 80%; height: 26px; }
+}
