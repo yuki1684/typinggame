@@ -1,11 +1,11 @@
 // ゲームの単語リスト
 const words = [
-    'typing', 'javascript', 'game', 'battle', 'challenge',
-    'keyboard', 'speed', 'accuracy', 'combat', 'warrior',
+    'apple', 'mountain', 'game', 'river', 'challenge',
+    'keyboard', 'speed', 'computer', 'combat', 'friendship',
     'magic', 'dragon', 'adventure', 'quest', 'monster',
-    'victory', 'defeat', 'champion', 'skill', 'training',
-    'program', 'computer', 'code', 'function', 'array',
-    'database', 'network', 'server', 'client', 'browser'
+    'victory', 'library', 'champion', 'skill', 'bicycle',
+    'teacher', 'music', 'code', 'function', 'garden',
+    'clock', 'network', 'server', 'train', 'energy'
 ];
 
 // ゲーム状態
