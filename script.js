@@ -51,7 +51,7 @@ const restartBtn = document.getElementById('restartBtn');
 const PLAYER_BATTLE_IMG = 'youmu-batoru.png';
 const PLAYER_DAMAGE_IMG = 'youmu-dame-ji.png';
 const ENEMY_BATTLE_IMG = 'huran-batoru.png';
-const ENEMY_DAMAGE_IMG = 'huran-same-ji.png';
+const ENEMY_DAMAGE_IMG = 'huran-dame-ji.png';
 
 // タイマー管理
 let timerIntervalId = null;
@@ -134,7 +134,7 @@ function checkInput() {
 // 正解時の処理（敵にダメージ） - 画像差し替えと移動を追加
 function handleCorrect() {
     gameState.correctCount++;
-    gameState.enemyHP = Math.max(0, gameState.enemyHP - 20);
+    gameState.enemyHP = Math.max(0, gameState.enemyHP - 10);
 
     // 敵にダメージ表現
     enemyImg.src = ENEMY_DAMAGE_IMG;
@@ -204,10 +204,10 @@ function endGame(playerWon) {
     clearInterval(timerIntervalId);
 
     if (playerWon) {
-        gameOverTitle.textContent = '🎉 勝利! 🎉';
+        gameOverTitle.textContent = ' 勝利! ';
         gameOverMessage.textContent = '敵を倒しました!';
     } else {
-        gameOverTitle.textContent = '💀 敗北 💀';
+        gameOverTitle.textContent = ' 敗北 ';
         gameOverMessage.textContent = 'ゲームオーバー...';
     }
 
