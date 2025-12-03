@@ -78,7 +78,7 @@ function initGame(mode = 'beginner') {
     // タイマー設定（上級者は2分）
     clearInterval(timerIntervalId);
     if (mode === 'advanced') {
-        timerRemaining = 60;
+        timerRemaining = 40;
         timerEl.textContent = formatTime(timerRemaining);
         timerEl.setAttribute('aria-hidden', 'false');
         timerIntervalId = setInterval(() => {
